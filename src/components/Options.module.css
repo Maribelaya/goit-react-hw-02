@@ -1,0 +1,11 @@
+.options {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  background-color: rgb(13, 210, 210);
+  width: 70px;
+  height: 30px;
+  border-radius: 10%;
+}
