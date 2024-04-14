@@ -9,7 +9,7 @@ const defaultFeedback = {
   neutral: 0,
   bad: 0,
 };
-// об'явлення функції отримання feedback з localStorage
+
 const getFeedback = () => {
   const savedFeedback = window.localStorage.getItem("feedback");
   if (savedFeedback !== null) {
@@ -22,8 +22,9 @@ const App = () => {
   const [feedback, setFeedback] = useState(getFeedback());
 
   const { good, neutral, bad } = feedback;
-  const totalFeedback = good + neutral + bad;
-  const positiveFeedback = Math.round((good / totalFeedback) * 100);
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positiveFeedback =
+    Math.round((feedback.good / totalFeedback) * 100) || 0;
 
   const updateFeedback = (feedbackType) => {
     setFeedback({
@@ -32,15 +33,22 @@ const App = () => {
     });
   };
 
-  // збереження у localStorage за допомогою useEffect
   useEffect(() => {
     window.localStorage.setItem("feedback", JSON.stringify(feedback));
   }, [feedback]);
 
+  const resetFeedback = () => {
+    setFeedback(defaultFeedback);
+  };
+
   return (
     <div>
       <Description />
-      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} />
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedback}
+        resetFeedback={resetFeedback}
+      />
       {totalFeedback > 0 ? (
         <Feedback
           good={good}
