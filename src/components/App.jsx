@@ -54,8 +54,8 @@ const App = () => {
           good={good}
           neutral={neutral}
           bad={bad}
-          total={totalFeedback}
-          positive={positiveFeedback}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
         />
       ) : (
         <Notification />
